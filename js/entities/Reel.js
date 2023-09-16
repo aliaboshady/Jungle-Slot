@@ -1,6 +1,6 @@
 class Reel
 {
-  constructor(scene, symbolsArray, rowCount, reelPositionX, reelSymbolsSpacing, symbolWidth, symbolHeight, reelPositionTop, spinSpeed)
+  constructor(scene, symbolsArray, rowCount, reelPositionX, reelSymbolsSpacing, symbolWidth, symbolHeight, reelPositionTop, spinSpeed, isLastReel = false)
   {
     this.scene = scene;
     this.symbolsArray = symbolsArray;
@@ -10,6 +10,7 @@ class Reel
     this.symbolWidth = symbolWidth;
     this.symbolHeight = symbolHeight;
     this.spinSpeed = spinSpeed;
+    this.isLastReel = isLastReel;
 
     this.reelPositionTop = reelPositionTop;
     this.reelPositionBottom = this.reelPositionTop + 2 * this.reelSymbolsSpacing;
@@ -55,6 +56,11 @@ class Reel
       {
         symbolImage.y = this.reelPositionCutoff - this.reelSymbolsSpacing * this.reel.length;
         this.spinRowsCountRemaining--;
+
+        if(this.spinRowsCountRemaining <= 0 && this.isLastReel)
+        {
+          this.scene.onSpinningStop();
+        }
       }
     });
   }
