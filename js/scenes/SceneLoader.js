@@ -7,7 +7,7 @@ class SceneLoader extends Phaser.Scene
 
   preload()
   {    
-    this.load.image('background', 'assets/images/background/Capa 1 copia.png');
+    this.load.image('background', 'assets/images/background/background.png');
     this.load.image('tableFrame', 'assets/images/table/table frame.png');
     this.load.image('tableBackground', 'assets/images/table/table background.png');
     
