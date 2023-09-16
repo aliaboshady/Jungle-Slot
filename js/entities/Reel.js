@@ -20,6 +20,7 @@ class Reel
     this.reel = [];
     this.spinRowsCountRemaining = 0;
     this.setRowsCountRemaining = 0;
+    this.topRowSymbolIndex = this.symbolsIndexArray.length - 4;
   }
 
   update()
@@ -45,6 +46,24 @@ class Reel
     return this.reelPositionTop - this.reelSymbolsSpacing * (this.symbolsIndexArray.length - this.rowCount - 1);
   }
 
+  updateCurrentShownSymbols()
+  {
+    this.topRowSymbolIndex--;
+    if(this.topRowSymbolIndex < 0)
+    {
+      this.topRowSymbolIndex = this.symbolsIndexArray.length - 1;
+    }
+  }
+
+  getRowSymbols()
+  {
+    let symbolIndexTop = this.topRowSymbolIndex;
+    let symbolIndexMid = symbolIndexTop == this.symbolsIndexArray.length - 1 ? 0 : symbolIndexTop + 1;
+    let symbolIndexBot = symbolIndexTop == this.symbolsIndexArray.length - 1 ? 1 : symbolIndexTop + 2;
+    symbolIndexBot = symbolIndexTop == this.symbolsIndexArray.length - 2 ? 0 : symbolIndexBot;
+    return [this.symbolsIndexArray[symbolIndexTop], this.symbolsIndexArray[symbolIndexMid], this.symbolsIndexArray[symbolIndexBot]];
+  }
+
   spinReelByRowsCount(shiftRowsCount)
   {
     this.spinRowsCountRemaining = shiftRowsCount;
@@ -58,6 +77,8 @@ class Reel
       {
         symbolImage.y = this.reelPositionCutoff - this.reelSymbolsSpacing * this.reel.length;
         this.spinRowsCountRemaining--;
+
+        this.updateCurrentShownSymbols();
 
         if(this.spinRowsCountRemaining <= 0 && this.isLastReel)
         {
@@ -78,6 +99,8 @@ class Reel
         {
           symbolImage.y = this.reelPositionCutoff - this.reelSymbolsSpacing * this.reel.length;
           this.setRowsCountRemaining--;
+
+          this.updateCurrentShownSymbols();
         }
       });
     }
