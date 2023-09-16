@@ -10,18 +10,12 @@ class SceneMain extends Phaser.Scene
     this.backgroundImage;
     this.tableBackground;
     this.tableFrame;
-    
-    this.reel1RenderTexture;
-    this.reel2RenderTexture;
-    this.reel3RenderTexture;
-    this.reel4RenderTexture;
-    this.reel5RenderTexture;
 
-    this.reelSymbols1;
-    this.reelSymbols2;
-    this.reelSymbols3;
-    this.reelSymbols4;
-    this.reelSymbols5;
+    this.reel1;
+    this.reel2;
+    this.reel3;
+    this.reel4;
+    this.reel5;
   }
 
   preload()
@@ -45,41 +39,20 @@ class SceneMain extends Phaser.Scene
 
   createReelsWithSymbols()
   {
-    this.reel1RenderTexture = this.add.renderTexture(400, 460, 230, 800).setDisplaySize(180, 580).setVisible(false);
-    this.reel1RenderTexture.draw('Cherry', 0, 0);
-    this.reel1RenderTexture.draw('Grape', 0, 200);
-    this.reel1RenderTexture.draw('Watermelon', 0, 400);
-    this.reel1RenderTexture.draw('Lemon', 0, 600);
-    //this.reel1RenderTexture.saveTexture('reelSymbols1');
+    const reelSymbolsArray = ['Cherry', 'Grape', 'Watermelon', 'Lemon', 'Cherry', 'Grape', 'Watermelon', 'Lemon'];
+    // REELS X POSITIONS: 400, 580, 765, 952, 1135
+    // REELS Y FIRST POSITION: 230
 
-    //this.reelSymbols1 = this.reel1RenderTexture.saveTexture('reelSymbols1');
+    this.reel1 = this.add.container(400, 230);
 
-    this.reel2RenderTexture = this.add.renderTexture(580, CENTERY, 230, 800).setDisplaySize(180, 580).setVisible(false);
-    this.reel2RenderTexture.draw('Cherry', 0, 0);
-    this.reel2RenderTexture.draw('Grape', 0, 200);
-    this.reel2RenderTexture.draw('Watermelon', 0, 400);
-    this.reel2RenderTexture.draw('Lemon', 0, 600);
-    //this.reelSymbols2 = this.reel2RenderTexture.saveTexture('reelSymbols2');
+    this.addSymbolsToReel(this.reel1, reelSymbolsArray);
+  }
 
-    this.reel3RenderTexture = this.add.renderTexture(765, CENTERY, 230, 800).setDisplaySize(180, 580).setVisible(false);
-    this.reel3RenderTexture.draw('Cherry', 0, 0);
-    this.reel3RenderTexture.draw('Grape', 0, 200);
-    this.reel3RenderTexture.draw('Watermelon', 0, 400);
-    this.reel3RenderTexture.draw('Lemon', 0, 600);
-    //this.reelSymbols3 = this.reel3RenderTexture.saveTexture('reelSymbols3');
-
-    this.reel4RenderTexture = this.add.renderTexture(952, CENTERY, 230, 800).setDisplaySize(180, 580).setVisible(false);
-    this.reel4RenderTexture.draw('Cherry', 0, 0);
-    this.reel4RenderTexture.draw('Grape', 0, 200);
-    this.reel4RenderTexture.draw('Watermelon', 0, 400);
-    this.reel4RenderTexture.draw('Lemon', 0, 600);
-    //this.reelSymbols4 = this.reel4RenderTexture.saveTexture('reelSymbols4');
-
-    this.reel5RenderTexture = this.add.renderTexture(1135, CENTERY, 230, 800).setDisplaySize(180, 580).setVisible(false);
-    this.reel5RenderTexture.draw('Cherry', 0, 0);
-    this.reel5RenderTexture.draw('Grape', 0, 200);
-    this.reel5RenderTexture.draw('Watermelon', 0, 400);
-    this.reel5RenderTexture.draw('Lemon', 0, 600);
-    //this.reelSymbols5 = this.reel5RenderTexture.saveTexture('reelSymbols5');
+  addSymbolsToReel(reel, reelSymbolsArray)
+  {
+    reelSymbolsArray.forEach((symbolName, i) => {
+      const symbolImage = this.add.image(0, i * 150 /* SPACES */, symbolName).setDisplaySize(150, 120) /* SYMBOL SIZE */;
+      reel.add(symbolImage);
+    });
   }
 }
