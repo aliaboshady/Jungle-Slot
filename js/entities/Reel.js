@@ -1,6 +1,6 @@
 class Reel
 {
-  constructor(scene, symbolsArray, rowCount, reelPositionX, reelSymbolsSpacing, symbolWidth, symbolHeight, reelPositionTop)
+  constructor(scene, symbolsArray, rowCount, reelPositionX, reelSymbolsSpacing, symbolWidth, symbolHeight, reelPositionTop, spinSpeed)
   {
     this.scene = scene;
     this.symbolsArray = symbolsArray;
@@ -9,12 +9,24 @@ class Reel
     this.reelSymbolsSpacing = reelSymbolsSpacing;
     this.symbolWidth = symbolWidth;
     this.symbolHeight = symbolHeight;
+    this.spinSpeed = spinSpeed;
 
     this.reelPositionTop = reelPositionTop;
     this.reelPositionBottom = this.reelPositionTop + 2 * this.reelSymbolsSpacing;
     this.reelPositionCutoff = this.reelPositionBottom + 2 * this.reelSymbolsSpacing;
+    this.reelPositionOneBelowBottom = this.reelPositionBottom + this.reelSymbolsSpacing;
 
     this.reel = [];
+    this.spinRowsCountRemaining = 0;
+    this.setRowsCountRemaining = 0;
+  }
+
+  update()
+  {
+    if(this.spinRowsCountRemaining > 0)
+    {
+      this.spinReel();
+    }
   }
 
   addSymbolsToReel()
@@ -27,17 +39,39 @@ class Reel
 
   getReelPositionAllSymbolsUp()
   {
-    return this.reelPositionTop - this.reelSymbolsSpacing * (this.symbolsArray.length - this.rowCount);
+    return this.reelPositionTop - this.reelSymbolsSpacing * (this.symbolsArray.length - this.rowCount - 1);
   }
 
-  spinReel(spinSpeed)
+  spinReelByRowsCount(shiftRowsCount)
+  {
+    this.spinRowsCountRemaining = shiftRowsCount;
+  }
+
+  spinReel()
   {
     this.reel.forEach(symbolImage => {
-      symbolImage.y += spinSpeed;
+      symbolImage.y += this.spinSpeed;
       if(symbolImage.y >= this.reelPositionCutoff)
       {
         symbolImage.y = this.reelPositionCutoff - this.reelSymbolsSpacing * this.reel.length;
+        this.spinRowsCountRemaining--;
       }
     });
+  }
+
+  setReelByRowsCount(shiftRowsCount)
+  {
+    this.setRowsCountRemaining = shiftRowsCount;
+
+    while (this.setRowsCountRemaining > 0) {
+      this.reel.forEach(symbolImage => {
+        symbolImage.y += this.spinSpeed;
+        if(symbolImage.y >= this.reelPositionCutoff)
+        {
+          symbolImage.y = this.reelPositionCutoff - this.reelSymbolsSpacing * this.reel.length;
+          this.setRowsCountRemaining--;
+        }
+      });
+    }
   }
 }

@@ -24,11 +24,11 @@ class SceneMain extends Phaser.Scene
     this.symbolsArrayReel4 = ['Cherry', 'Watermelon', 'Grape', 'Watermelon', 'Cherry', 'Watermelon', 'Lemon', 'Cherry', 'Grape', 'Watermelon', 'Lemon', 'Cherry', 'Grape', 'Watermelon', 'Lemon'];
     this.symbolsArrayReel5 = ['Cherry', 'Grape', 'Watermelon', 'Cherry', 'Grape', 'Watermelon', 'Cherry', 'Grape', 'Watermelon', 'Lemon', 'Cherry', 'Grape', 'Watermelon'];
     
-    this.reel1 = new Reel(this, this.symbolsArrayReel1, this.rowCount, this.reelsPositions[0], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop);
-    this.reel2 = new Reel(this, this.symbolsArrayReel2, this.rowCount, this.reelsPositions[1], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop);
-    this.reel3 = new Reel(this, this.symbolsArrayReel3, this.rowCount, this.reelsPositions[2], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop);
-    this.reel4 = new Reel(this, this.symbolsArrayReel4, this.rowCount, this.reelsPositions[3], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop);
-    this.reel5 = new Reel(this, this.symbolsArrayReel5, this.rowCount, this.reelsPositions[4], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop);
+    this.reel1 = new Reel(this, this.symbolsArrayReel1, this.rowCount, this.reelsPositions[0], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed);
+    this.reel2 = new Reel(this, this.symbolsArrayReel2, this.rowCount, this.reelsPositions[1], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed);
+    this.reel3 = new Reel(this, this.symbolsArrayReel3, this.rowCount, this.reelsPositions[2], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed);
+    this.reel4 = new Reel(this, this.symbolsArrayReel4, this.rowCount, this.reelsPositions[3], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed);
+    this.reel5 = new Reel(this, this.symbolsArrayReel5, this.rowCount, this.reelsPositions[4], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed);
   }
 
   create()
@@ -43,15 +43,17 @@ class SceneMain extends Phaser.Scene
     
     this.tableFrame = this.add.image(CENTERX, CENTERY, 'tableFrame');
     Align.scaleToGameW(this.tableFrame, 0.9);
+
+    this.reel1.setReelByRowsCount(0);
   }
 
   update()
   {
-    this.reel1.spinReel(this.spinSpeed);
-    this.reel2.spinReel(this.spinSpeed);
-    this.reel3.spinReel(this.spinSpeed);
-    this.reel4.spinReel(this.spinSpeed);
-    this.reel5.spinReel(this.spinSpeed);
+    this.reel1.update();
+    this.reel2.update();
+    this.reel3.update();
+    this.reel4.update();
+    this.reel5.update();
   }
 
   createReelsWithSymbols()
