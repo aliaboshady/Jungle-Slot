@@ -22,17 +22,11 @@ class SceneMain extends Phaser.Scene
 
     this.isReelsSpinning = false;
 
-    this.symbolsArrayReel1 = ['Cherry', 'Grape', 'Watermelon', 'Cherry', 'Grape', 'Watermelon', 'Cherry', 'Grape', 'Watermelon', 'Lemon', 'Cherry', 'Grape', 'Watermelon', 'Lemon', 'Cherry', 'Grape', 'Watermelon', 'Lemon'];
-    this.symbolsArrayReel2 = ['Cherry', 'Grape', 'Grape', 'Watermelon', 'Cherry', 'Watermelon', 'Lemon', 'Cherry', 'Grape', 'Lemon', 'Cherry', 'Grape', 'Watermelon', 'Lemon'];
-    this.symbolsArrayReel3 = ['Cherry', 'Grape', 'Watermelon', 'Cherry', 'Grape', 'Watermelon', 'Cherry', 'Grape', 'Watermelon', 'Lemon', 'Cherry'];
-    this.symbolsArrayReel4 = ['Cherry', 'Watermelon', 'Grape', 'Watermelon', 'Cherry', 'Watermelon', 'Lemon', 'Cherry', 'Grape', 'Watermelon', 'Lemon', 'Cherry', 'Grape', 'Watermelon', 'Lemon'];
-    this.symbolsArrayReel5 = ['Cherry', 'Grape', 'Watermelon', 'Cherry', 'Grape', 'Watermelon', 'Cherry', 'Grape', 'Watermelon', 'Lemon', 'Cherry', 'Grape', 'Watermelon'];
-    
-    this.reel1 = new Reel(this, this.symbolsArrayReel1, this.rowCount, this.reelsPositions[0], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed);
-    this.reel2 = new Reel(this, this.symbolsArrayReel2, this.rowCount, this.reelsPositions[1], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed);
-    this.reel3 = new Reel(this, this.symbolsArrayReel3, this.rowCount, this.reelsPositions[2], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed);
-    this.reel4 = new Reel(this, this.symbolsArrayReel4, this.rowCount, this.reelsPositions[3], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed);
-    this.reel5 = new Reel(this, this.symbolsArrayReel5, this.rowCount, this.reelsPositions[4], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed, true);
+    this.reel1 = new Reel(this, ReelsInfo.Reel1, this.rowCount, this.reelsPositions[0], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed);
+    this.reel2 = new Reel(this, ReelsInfo.Reel2, this.rowCount, this.reelsPositions[1], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed);
+    this.reel3 = new Reel(this, ReelsInfo.Reel3, this.rowCount, this.reelsPositions[2], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed);
+    this.reel4 = new Reel(this, ReelsInfo.Reel4, this.rowCount, this.reelsPositions[3], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed);
+    this.reel5 = new Reel(this, ReelsInfo.Reel5, this.rowCount, this.reelsPositions[4], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed, true);
   }
 
   create()

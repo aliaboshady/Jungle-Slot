@@ -12,8 +12,7 @@ class SceneLoader extends Phaser.Scene
     this.load.image('tableBackground', 'assets/images/table/table background.png');
     this.load.image('spinButton', 'assets/images/spin button/spinButton.png');
     
-    this.reelSymbols = ['Cherry', 'Grape', 'Watermelon', 'Lemon'];
-    this.reelSymbols.forEach(function (symbolKey) {
+    ReelsInfo.AllReelSymbols.forEach(function (symbolKey) {
       this.load.image(symbolKey, 'assets/images/symbols/' + symbolKey + '.png');
     }, this);
   }
