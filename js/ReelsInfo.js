@@ -8,7 +8,7 @@ class ReelsInfo
   static Reel4 = [3, 0, 2, 9, 12, 7, 14, 6, 11, 5, 1, 8, 10, 4, 13, 15, 11, 6, 13, 3, 8, 1, 5, 2, 0, 15, 7];
   static Reel5 = [2, 10, 7, 11, 3, 12, 0, 6, 14, 9, 4, 1, 13, 15, 8, 5, 5, 10, 8, 0, 11, 9, 15, 4, 1, 13, 12, 3, 7, 2, 10];
 
-  static GetRowSymbolName(symbolIndexArray, index)
+  static GetRowSymbolNameByReelIndex(symbolIndexArray, index)
   {
     return this.AllReelSymbols[symbolIndexArray[index]];
   }

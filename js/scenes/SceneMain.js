@@ -12,7 +12,7 @@ class SceneMain extends Phaser.Scene
     this.tableFrame;
     this.spinButton;
 
-    this.spinSpeed = 30;
+    this.spinSpeed = 15;
     this.rowCount = 3;
     this.reelsPositions = [400, 580, 765, 952, 1135];
     this.reelSymbolsSpacing = 150;
@@ -63,11 +63,11 @@ class SceneMain extends Phaser.Scene
 
   createReelsWithSymbols()
   {
-    this.reel1.addSymbolsToReel();
-    this.reel2.addSymbolsToReel();
-    this.reel3.addSymbolsToReel();
-    this.reel4.addSymbolsToReel();
-    this.reel5.addSymbolsToReel();
+    this.reel1.addSymbolsToReel().setReelByRowsCount(Phaser.Math.Between(0, this.reel1.reel.length));
+    this.reel2.addSymbolsToReel().setReelByRowsCount(Phaser.Math.Between(0, this.reel2.reel.length));
+    this.reel3.addSymbolsToReel().setReelByRowsCount(Phaser.Math.Between(0, this.reel3.reel.length));
+    this.reel4.addSymbolsToReel().setReelByRowsCount(Phaser.Math.Between(0, this.reel4.reel.length));
+    this.reel5.addSymbolsToReel().setReelByRowsCount(Phaser.Math.Between(0, this.reel5.reel.length));
     this.updateReelsGrid();
   }
 
@@ -90,7 +90,7 @@ class SceneMain extends Phaser.Scene
     this.fillReelGridColumn(this.reel3.getRowSymbols(), 2);
     this.fillReelGridColumn(this.reel4.getRowSymbols(), 3);
     this.fillReelGridColumn(this.reel5.getRowSymbols(), 4);
-    console.log(this.reelsGrid);
+    this.printReelGrid();
   }
 
   fillReelGridColumn(reelRowSymbols, j)
@@ -104,5 +104,19 @@ class SceneMain extends Phaser.Scene
   {
     this.isReelsSpinning = false;
     this.updateReelsGrid();
+  }
+
+  printReelGrid()
+  {
+    let tempReelsGrid = [];
+
+    for (let i = 0; i < this.reelsGrid.length; i++) {
+      tempReelsGrid.push([]);
+      for (let j = 0; j < this.reelsGrid[0].length; j++) {
+        tempReelsGrid[i].push(ReelsInfo.AllReelSymbols[this.reelsGrid[i][j]]);
+      }
+    }
+
+    console.log(tempReelsGrid);
   }
 }

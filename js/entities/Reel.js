@@ -19,7 +19,6 @@ class Reel
 
     this.reel = [];
     this.spinRowsCountRemaining = 0;
-    this.setRowsCountRemaining = 0;
     this.topRowSymbolIndex = this.symbolsIndexArray.length - 4;
   }
 
@@ -39,6 +38,8 @@ class Reel
       const symbolImage = this.scene.add.image(this.reelPositionX, i * this.reelSymbolsSpacing + this.getReelPositionAllSymbolsUp(), symbolName).setDisplaySize(this.symbolWidth, this.symbolHeight);
       this.reel.push(symbolImage);
     });
+
+    return this;
   }
 
   getReelPositionAllSymbolsUp()
@@ -90,15 +91,13 @@ class Reel
 
   setReelByRowsCount(shiftRowsCount)
   {
-    this.setRowsCountRemaining = shiftRowsCount;
-
-    while (this.setRowsCountRemaining > 0) {
+    while (shiftRowsCount > 0) {
       this.reel.forEach(symbolImage => {
         symbolImage.y += this.spinSpeed;
         if(symbolImage.y >= this.reelPositionCutoff)
         {
           symbolImage.y = this.reelPositionCutoff - this.reelSymbolsSpacing * this.reel.length;
-          this.setRowsCountRemaining--;
+          shiftRowsCount--;
 
           this.updateCurrentShownSymbols();
         }
