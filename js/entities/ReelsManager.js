@@ -65,14 +65,18 @@ class ReelsManager
 
   onSpinningStop()
   {
-    this.isReelsSpinning = false;
-    this.scene.enableSpinButton();
     this.updateReelsGrid();
 
     const winningLinesIndexes = this.spinOutcomeManager.calculateWin(this.reelsGrid);
+    
     if(winningLinesIndexes.length > 0)
     {
       this.showWinningLinesAnimation(winningLinesIndexes);
+    }
+    else
+    {
+      this.isReelsSpinning = false;
+      this.scene.enableSpinButton();
     }
   }
 
@@ -110,6 +114,9 @@ class ReelsManager
     this.reels.forEach(reel => {
       reel.showAllSymbols();
     });
+
+    this.isReelsSpinning = false;
+    this.scene.enableSpinButton();
   }
 
   showWinningLine(winningLinesIndex)
