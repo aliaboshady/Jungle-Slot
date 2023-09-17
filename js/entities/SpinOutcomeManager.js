@@ -38,5 +38,7 @@ class SpinOutcomeManager
       console.log('\nWinning Lines Indexes:');
       console.log(winningLinesIndexes);
     }
+
+    return winningLinesIndexes;
   }
 }

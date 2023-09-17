@@ -49,11 +49,28 @@ class ReelsManager
     this.isReelsSpinning = true;
     this.scene.enableSpinButton(false);
 
+    this.reels.forEach(reel => {
+      reel.showAllSymbols();
+    });
+
     let shiftRowsCount = 25;
     this.reels.forEach(reel => {
       reel.spinReelByRowsCount(shiftRowsCount);
       shiftRowsCount += 10;
     });
+  }
+
+  onSpinningStop()
+  {
+    this.isReelsSpinning = false;
+    this.scene.enableSpinButton();
+    this.updateReelsGrid();
+
+    const winningLinesIndexes = this.spinOutcomeManager.calculateWin(this.reelsGrid);
+    if(winningLinesIndexes.length > 0)
+    {
+      this.showWinningLines(winningLinesIndexes);
+    }
   }
 
   updateReelsGrid()
@@ -72,12 +89,23 @@ class ReelsManager
     }
   }
 
-  onSpinningStop()
+  showWinningLines(winningLinesIndexes)
   {
-    this.isReelsSpinning = false;
-    this.scene.enableSpinButton();
-    this.updateReelsGrid();
-    this.spinOutcomeManager.calculateWin(this.reelsGrid);
+    this.reels.forEach(reel => {
+      reel.showAllSymbols(false);
+    });
+
+    winningLinesIndexes.forEach(winningLinesIndex => {
+      const winningLinePosY = ReelsInfo.WinLines[winningLinesIndex[0]].PositionY;
+      const sequenceCount = winningLinesIndex[1];
+
+      winningLinePosY.forEach((posY, i) => {
+        if(i < sequenceCount)
+        {
+          this.reels[i].showOneSymbol(posY);
+        }
+      });
+    });
   }
 
   printReelGrid()

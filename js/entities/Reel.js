@@ -66,6 +66,15 @@ class Reel
     return [this.symbolsIndexArray[symbolIndexTop], this.symbolsIndexArray[symbolIndexMid], this.symbolsIndexArray[symbolIndexBot]];
   }
 
+  getCurrentSymbolsIndexes()
+  {
+    let symbolIndexTop = this.topRowSymbolIndex;
+    let symbolIndexMid = symbolIndexTop == this.symbolsIndexArray.length - 1 ? 0 : symbolIndexTop + 1;
+    let symbolIndexBot = symbolIndexTop == this.symbolsIndexArray.length - 1 ? 1 : symbolIndexTop + 2;
+    symbolIndexBot = symbolIndexTop == this.symbolsIndexArray.length - 2 ? 0 : symbolIndexBot;
+    return [symbolIndexTop, symbolIndexMid, symbolIndexBot];
+  }
+
   spinReelByRowsCount(shiftRowsCount)
   {
     this.spinRowsCountRemaining = shiftRowsCount;
@@ -104,5 +113,22 @@ class Reel
         }
       });
     }
+  }
+
+  showOneSymbol(symbolIndex)
+  {
+    this.reel.forEach(symbolImage => {
+      symbolImage.alpha = 0.2;
+    });
+    
+    const topSymbolIndex = this.getCurrentSymbolsIndexes()[0];
+    this.reel[topSymbolIndex + symbolIndex].alpha = 1;
+  }
+
+  showAllSymbols(showAll = true)
+  {
+    this.reel.forEach(symbolImage => {
+      symbolImage.alpha = showAll ? 1 : 0.2;
+    });
   }
 }
