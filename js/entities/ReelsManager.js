@@ -50,6 +50,7 @@ class ReelsManager
   {
     if(this.isReelsSpinning) return;
     this.isReelsSpinning = true;
+    this.scene.enableSpinButton(false);
 
     this.reel1.spinReelByRowsCount(25);
     this.reel2.spinReelByRowsCount(35);
@@ -78,6 +79,7 @@ class ReelsManager
   onSpinningStop()
   {
     this.isReelsSpinning = false;
+    this.scene.enableSpinButton();
     this.updateReelsGrid();
     this.spinOutcomeManager.calculateWin(this.reelsGrid);
   }
