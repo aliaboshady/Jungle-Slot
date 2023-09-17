@@ -12,7 +12,8 @@ class SceneMain extends Phaser.Scene
     this.tableFrame;
     this.spinButton;
 
-    this.reelsManager = new ReelsManager(this, 15, 3, [400, 580, 765, 952, 1135], 150, 150, 100, 230);
+    this.spinOutcomeManager = new SpinOutcomeManager(this, 3);
+    this.reelsManager = new ReelsManager(this, this.spinOutcomeManager, 15, 3, [400, 580, 765, 952, 1135], 150, 150, 100, 230);
     this.winLinesManager = new WinLinesManager(this, [400, 580, 765, 952, 1135], [230, 380, 530], 270, 1265);
 }
 

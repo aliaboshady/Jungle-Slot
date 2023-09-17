@@ -1,8 +1,9 @@
 class ReelsManager
 {
-  constructor(scene, spinSpeed, rowCount, reelsPositions, reelSymbolsSpacing, symbolWidth, symbolHeight, reelPositionTop)
+  constructor(scene, spinOutcomeManager, spinSpeed, rowCount, reelsPositions, reelSymbolsSpacing, symbolWidth, symbolHeight, reelPositionTop)
   {
     this.scene = scene;
+    this.spinOutcomeManager = spinOutcomeManager;
     this.spinSpeed = spinSpeed;
     this.rowCount = rowCount;
     this.reelsPositions = reelsPositions;
@@ -78,6 +79,7 @@ class ReelsManager
   {
     this.isReelsSpinning = false;
     this.updateReelsGrid();
+    this.spinOutcomeManager.calculateWin(this.reelsGrid);
   }
 
   printReelGrid()
@@ -91,6 +93,7 @@ class ReelsManager
       }
     }
 
+    console.log('\nReels Grid:');
     console.log(tempReelsGrid);
   }
 }
