@@ -13,6 +13,7 @@ class SceneMain extends Phaser.Scene
     this.spinButton;
 
     this.reelsManager = new ReelsManager(this, 15, 3, [400, 580, 765, 952, 1135], 150, 150, 100, 230);
+    this.winLinesManager = new WinLinesManager(this, [400, 580, 765, 952, 1135], [230, 380, 530], 270, 1265);
 }
 
   create()
@@ -30,6 +31,8 @@ class SceneMain extends Phaser.Scene
     
     this.spinButton = this.add.image(CENTERX, 685, 'spinButton').setInteractive().on('pointerdown', this.reelsManager.onClickSpin, this.reelsManager);
     Align.scaleToGameW(this.spinButton, 0.2);
+
+    this.winLinesManager.drawWinLines();
   }
 
   update()

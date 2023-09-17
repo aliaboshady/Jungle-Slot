@@ -21,12 +21,12 @@ class ReelsInfo
 
   static WinLines =
   [
-    [0, 0, 0, 0, 0],
-    [1, 1, 1, 1, 1],
-    [2, 2, 2, 2, 2],
-    [0, 0, 1, 2, 2],
-    [2, 2, 1, 0, 0],
-    [0, 1, 1, 1, 2],
-    [2, 1, 1, 1, 0]
+    {Name: 'Red',     PositionY: [0, 0, 0, 0, 0],   Color: 0xFF0000,    OffsetYTop: -20, OffsetYMid: 0,    OffsetYBot: -20},
+    {Name: 'Orange',  PositionY: [0, 1, 1, 1, 2],   Color: 0xFF8103,    OffsetYTop: 20,  OffsetYMid: -20,  OffsetYBot: -20},
+    {Name: 'Yellow',  PositionY: [0, 0, 1, 2, 2],   Color: 0xFFFF00,    OffsetYTop: 0,   OffsetYMid: 0,    OffsetYBot: 0},
+    {Name: 'Green',   PositionY: [1, 1, 1, 1, 1],   Color: 0x00FF00,    OffsetYTop: 0,   OffsetYMid: 0,    OffsetYBot: 0},
+    {Name: 'Purple',  PositionY: [2, 2, 1, 0, 0],   Color: 0xB303FF,    OffsetYTop: 0,   OffsetYMid: 0,    OffsetYBot: 0},
+    {Name: 'Pink',    PositionY: [2, 1, 1, 1, 0],   Color: 0xFF9EAF,    OffsetYTop: 20,  OffsetYMid: 20,   OffsetYBot: -20},
+    {Name: 'Blue',    PositionY: [2, 2, 2, 2, 2],   Color: 0x0000FF,    OffsetYTop: 20,  OffsetYMid: 0,    OffsetYBot: 20}
   ];
 }
