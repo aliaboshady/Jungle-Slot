@@ -68,7 +68,7 @@ class ReelsManager
     this.updateReelsGrid();
 
     const winningLinesIndexes = this.spinOutcomeManager.calculateWin(this.reelsGrid);
-    
+
     if(winningLinesIndexes.length > 0)
     {
       this.showWinningLinesAnimation(winningLinesIndexes);
@@ -107,18 +107,6 @@ class ReelsManager
     this.scene.time.addEvent({delay: (lastI + 2) * this.winLineAnimationDelay, callback: this.finishWinningLinesAnimation, callbackScope: this, loop: false});
   }
 
-  finishWinningLinesAnimation()
-  {
-    this.winLinesManager.drawWinLines(false);
-
-    this.reels.forEach(reel => {
-      reel.showAllSymbols();
-    });
-
-    this.isReelsSpinning = false;
-    this.scene.enableSpinButton();
-  }
-
   showWinningLine(winningLinesIndex)
   {
     this.reels.forEach(reel => {
@@ -136,6 +124,18 @@ class ReelsManager
     });
 
     this.winLinesManager.drawWinLines(true, winningLinesIndex[0]);
+  }
+
+  finishWinningLinesAnimation()
+  {
+    this.winLinesManager.drawWinLines(false);
+
+    this.reels.forEach(reel => {
+      reel.showAllSymbols();
+    });
+
+    this.isReelsSpinning = false;
+    this.scene.enableSpinButton();
   }
 
   printReelGrid()

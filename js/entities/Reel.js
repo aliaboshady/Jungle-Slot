@@ -21,6 +21,7 @@ class Reel
     this.reel = [];
     this.spinRowsCountRemaining = 0;
     this.topRowSymbolIndex = this.symbolsIndexArray.length - 4;
+    this.disabledSymbolAlpha = 0.2;
   }
 
   update()
@@ -118,7 +119,8 @@ class Reel
   showOneSymbol(symbolIndex)
   {
     this.reel.forEach(symbolImage => {
-      symbolImage.alpha = 0.2;
+      symbolImage.alpha = this.disabledSymbolAlpha;
+      symbolImage.setDepth(0);
     });
     
     const symbolIndexTop = this.getCurrentSymbolsIndexes()[0];
@@ -130,12 +132,14 @@ class Reel
     }
     
     this.reel[symbolReelIndexToShow].alpha = 1;
+    this.reel[symbolReelIndexToShow].setDepth(10);
   }
 
   showAllSymbols(showAll = true)
   {
     this.reel.forEach(symbolImage => {
-      symbolImage.alpha = showAll ? 1 : 0.2;
+      symbolImage.alpha = showAll ? 1 : this.disabledSymbolAlpha;
+      symbolImage.setDepth(0);
     });
   }
 }
