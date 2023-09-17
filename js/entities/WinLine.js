@@ -12,27 +12,30 @@ class WinLine
     this.OffsetYBot = ReelsInfo.WinLines[winLineIndex].OffsetYBot;
     this.edgeXLeft = edgeXLeft
     this.edgeXRight = edgeXRight
+
+    this.graphics;
+    this.thickness = 7;
   }
 
-  drawWinLine()
+  drawWinLine(visible = true)
   {
-    const graphics = this.scene.add.graphics();
-    const thickness = 7;
-    graphics.lineStyle(thickness, this.winLineColor);
-
+    if(this.graphics) this.graphics.clear();
     const offsetYEdgeLeft = this.winLinesPositionsY[0] == 0 ? this.OffsetYTop : this.OffsetYBot;
-    graphics.moveTo(this.edgeXLeft, this.reelsPositionsY[this.winLinesPositionsY[0]] + offsetYEdgeLeft);
+    this.graphics = this.scene.add.graphics().lineStyle(this.thickness, this.winLineColor);
+    this.graphics.moveTo(this.edgeXLeft, this.reelsPositionsY[this.winLinesPositionsY[0]] + offsetYEdgeLeft);
 
     for (let i = 0; i < this.reelsPositionsX.length; i++) {
       let offsetY = 0;
       if(this.winLinesPositionsY[i] == 0) offsetY = this.OffsetYTop;
       else if(this.winLinesPositionsY[i] == 1) offsetY = this.OffsetYMid;
       else if(this.winLinesPositionsY[i] == 2) offsetY = this.OffsetYBot;
-      graphics.lineTo(this.reelsPositionsX[i], this.reelsPositionsY[this.winLinesPositionsY[i]] + offsetY);
+      this.graphics.lineTo(this.reelsPositionsX[i], this.reelsPositionsY[this.winLinesPositionsY[i]] + offsetY);
     }
 
     const offsetYEdgeRight = this.winLinesPositionsY[0] == 0 ? this.OffsetYBot : this.OffsetYTop;
-    graphics.lineTo(this.edgeXRight, this.reelsPositionsY[this.winLinesPositionsY[this.reelsPositionsX.length - 1]] + offsetYEdgeRight);
-    graphics.strokePath();
+    this.graphics.lineTo(this.edgeXRight, this.reelsPositionsY[this.winLinesPositionsY[this.reelsPositionsX.length - 1]] + offsetYEdgeRight);
+    this.graphics.strokePath();
+
+    visible ? this.graphics.alpha = 1 : this.graphics.alpha =  0;
   }
 }

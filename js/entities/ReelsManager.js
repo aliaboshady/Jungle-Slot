@@ -1,9 +1,10 @@
 class ReelsManager
 {
-  constructor(scene, spinOutcomeManager, spinSpeed, rowCount, reelsPositions, reelSymbolsSpacing, symbolWidth, symbolHeight, reelPositionTop)
+  constructor(scene, spinOutcomeManager, winLinesManager, spinSpeed, rowCount, reelsPositions, reelSymbolsSpacing, symbolWidth, symbolHeight, reelPositionTop)
   {
     this.scene = scene;
     this.spinOutcomeManager = spinOutcomeManager;
+    this.winLinesManager = winLinesManager;
     this.spinSpeed = spinSpeed;
     this.rowCount = rowCount;
     this.reelsPositions = reelsPositions;
@@ -12,6 +13,7 @@ class ReelsManager
     this.symbolHeight = symbolHeight;
     this.reelPositionTop = reelPositionTop;
 
+    this.winLineAnimationDelay = 500;
     this.isReelsSpinning = false;
     this.reelsGrid = 
     [ 
@@ -48,6 +50,7 @@ class ReelsManager
     if(this.isReelsSpinning) return;
     this.isReelsSpinning = true;
     this.scene.enableSpinButton(false);
+    this.winLinesManager.drawWinLines(false);
 
     this.reels.forEach(reel => {
       reel.showAllSymbols();
@@ -69,7 +72,7 @@ class ReelsManager
     const winningLinesIndexes = this.spinOutcomeManager.calculateWin(this.reelsGrid);
     if(winningLinesIndexes.length > 0)
     {
-      this.showWinningLines(winningLinesIndexes);
+      this.showWinningLinesAnimation(winningLinesIndexes);
     }
   }
 
@@ -89,23 +92,43 @@ class ReelsManager
     }
   }
 
-  showWinningLines(winningLinesIndexes)
+  showWinningLinesAnimation(winningLinesIndexes)
+  {
+    let lastI = 0;
+    winningLinesIndexes.forEach((winningLinesIndex, i) => {
+      this.scene.time.addEvent({delay: i * this.winLineAnimationDelay, callback: this.showWinningLine, args: [winningLinesIndex], callbackScope: this, loop: false});
+      lastI = i;
+    });
+
+    this.scene.time.addEvent({delay: (lastI + 2) * this.winLineAnimationDelay, callback: this.finishWinningLinesAnimation, callbackScope: this, loop: false});
+  }
+
+  finishWinningLinesAnimation()
+  {
+    this.winLinesManager.drawWinLines(false);
+
+    this.reels.forEach(reel => {
+      reel.showAllSymbols();
+    });
+  }
+
+  showWinningLine(winningLinesIndex)
   {
     this.reels.forEach(reel => {
       reel.showAllSymbols(false);
     });
 
-    winningLinesIndexes.forEach(winningLinesIndex => {
-      const winningLinePosY = ReelsInfo.WinLines[winningLinesIndex[0]].PositionY;
-      const sequenceCount = winningLinesIndex[1];
+    const winningLinePosY = ReelsInfo.WinLines[winningLinesIndex[0]].PositionY;
+    const sequenceCount = winningLinesIndex[1];
 
-      winningLinePosY.forEach((posY, i) => {
-        if(i < sequenceCount)
-        {
-          this.reels[i].showOneSymbol(posY);
-        }
-      });
+    winningLinePosY.forEach((posY, i) => {
+      if(i < sequenceCount)
+      {
+        this.reels[i].showOneSymbol(posY);
+      }
     });
+
+    this.winLinesManager.drawWinLines(true, winningLinesIndex[0]);
   }
 
   printReelGrid()

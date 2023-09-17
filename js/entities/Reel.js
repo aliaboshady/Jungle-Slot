@@ -121,8 +121,15 @@ class Reel
       symbolImage.alpha = 0.2;
     });
     
-    const topSymbolIndex = this.getCurrentSymbolsIndexes()[0];
-    this.reel[topSymbolIndex + symbolIndex].alpha = 1;
+    const symbolIndexTop = this.getCurrentSymbolsIndexes()[0];
+    let symbolReelIndexToShow = symbolIndexTop + symbolIndex;
+
+    if(symbolReelIndexToShow >= this.reel.length)
+    {
+      symbolReelIndexToShow -= this.reel.length;
+    }
+    
+    this.reel[symbolReelIndexToShow].alpha = 1;
   }
 
   showAllSymbols(showAll = true)

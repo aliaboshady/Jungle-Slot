@@ -10,10 +10,22 @@ class WinLinesManager
     }
   }
 
-  drawWinLines()
+  drawWinLines(visible = true, winLineIndex = -1)
   {
     this.winLines.forEach(winLine => {
-      winLine.drawWinLine();
+      winLine.drawWinLine(false);
     });
+    if(!visible) return;
+
+    if(winLineIndex == -1)
+    {
+      this.winLines.forEach(winLine => {
+        winLine.drawWinLine(visible);
+      });
+    }
+    else
+    {
+      this.winLines[winLineIndex].drawWinLine(visible);
+    }
   }
 }
