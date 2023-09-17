@@ -11,6 +11,7 @@ class SceneMain extends Phaser.Scene
     this.tableBackground;
     this.tableFrame;
     this.spinButton;
+    this.linesButton;
     this.disableTint = 0x6E6E6E;
 
     this.spinOutcomeManager = new SpinOutcomeManager(this, 3);
@@ -35,7 +36,8 @@ class SceneMain extends Phaser.Scene
     Align.scaleToGameW(this.spinButton, 0.2);
     Align.scaleToGameW(this.add.image(CENTERX, 685, 'leaves'), 0.2);
 
-    //this.winLinesManager.drawWinLines();
+    this.linesButton = this.add.image(520, 685, 'linesButton').setInteractive().on('pointerdown', () => {this.onClickButtonLines(true)}, this).on('pointerup', () => {this.onClickButtonLines(false)}, this);
+    Align.scaleToGameW(this.linesButton, 0.1);
   }
 
   update()
@@ -46,5 +48,10 @@ class SceneMain extends Phaser.Scene
   enableSpinButton(enbale = true)
   {
     this.spinButton.setTint(enbale ? 0xFFFFFF : this.disableTint);
+  }
+
+  onClickButtonLines(down)
+  {
+    this.winLinesManager.drawWinLines(down);
   }
 }
