@@ -20,29 +20,26 @@ class ReelsManager
       [-1, -1, -1, -1, -1]
     ]
 
-    this.reel1 = new Reel(this.scene, this, ReelsInfo.Reel1, this.rowCount, this.reelsPositions[0], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed);
-    this.reel2 = new Reel(this.scene, this, ReelsInfo.Reel2, this.rowCount, this.reelsPositions[1], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed);
-    this.reel3 = new Reel(this.scene, this, ReelsInfo.Reel3, this.rowCount, this.reelsPositions[2], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed);
-    this.reel4 = new Reel(this.scene, this, ReelsInfo.Reel4, this.rowCount, this.reelsPositions[3], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed);
-    this.reel5 = new Reel(this.scene, this, ReelsInfo.Reel5, this.rowCount, this.reelsPositions[4], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed, true);
+    this.reels = [];
+    for (let i = 0; i < reelsPositions.length; i++) {
+      const reel = new Reel(this.scene, this, ReelsInfo.Reels['Reel' + (i + 1)], this.rowCount, this.reelsPositions[i], this.reelSymbolsSpacing, this.symbolWidth, this.symbolHeight, this.reelPositionTop, this.spinSpeed);
+      if(i == reelsPositions.length - 1) reel.isLastReel = true;
+      this.reels.push(reel);
+    }
   }
 
   update()
   {
-    this.reel1.update();
-    this.reel2.update();
-    this.reel3.update();
-    this.reel4.update();
-    this.reel5.update();
+    this.reels.forEach(reel => {
+      reel.update();
+    });
   }
 
   createReelsWithSymbols()
   {
-    this.reel1.addSymbolsToReel().setReelByRowsCount(Phaser.Math.Between(0, this.reel1.reel.length));
-    this.reel2.addSymbolsToReel().setReelByRowsCount(Phaser.Math.Between(0, this.reel2.reel.length));
-    this.reel3.addSymbolsToReel().setReelByRowsCount(Phaser.Math.Between(0, this.reel3.reel.length));
-    this.reel4.addSymbolsToReel().setReelByRowsCount(Phaser.Math.Between(0, this.reel4.reel.length));
-    this.reel5.addSymbolsToReel().setReelByRowsCount(Phaser.Math.Between(0, this.reel5.reel.length));
+    this.reels.forEach(reel => {
+      reel.addSymbolsToReel().setReelByRowsCount(Phaser.Math.Between(0, reel.reel.length));
+    });
     this.updateReelsGrid();
   }
 
@@ -52,20 +49,19 @@ class ReelsManager
     this.isReelsSpinning = true;
     this.scene.enableSpinButton(false);
 
-    this.reel1.spinReelByRowsCount(25);
-    this.reel2.spinReelByRowsCount(35);
-    this.reel3.spinReelByRowsCount(45);
-    this.reel4.spinReelByRowsCount(55);
-    this.reel5.spinReelByRowsCount(65);
+    let shiftRowsCount = 25;
+    this.reels.forEach(reel => {
+      reel.spinReelByRowsCount(shiftRowsCount);
+      shiftRowsCount += 10;
+    });
   }
 
   updateReelsGrid()
   {
-    this.fillReelGridColumn(this.reel1.getRowSymbols(), 0);
-    this.fillReelGridColumn(this.reel2.getRowSymbols(), 1);
-    this.fillReelGridColumn(this.reel3.getRowSymbols(), 2);
-    this.fillReelGridColumn(this.reel4.getRowSymbols(), 3);
-    this.fillReelGridColumn(this.reel5.getRowSymbols(), 4);
+    this.reels.forEach((reel, i) => {
+      this.fillReelGridColumn(reel.getRowSymbols(), i);
+    });
+
     this.printReelGrid();
   }
 
