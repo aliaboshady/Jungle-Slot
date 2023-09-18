@@ -2,7 +2,9 @@ class MoneyManager
 {
   constructor(scene)
   {
-
+    this.bet = ReelsInfo.InitialBet;
+    this.credits = ReelsInfo.InitialCredits;
+    this.won = 0;
   }
 
   calculatePayouts(winningLinesIndexes)
@@ -20,5 +22,19 @@ class MoneyManager
     }
 
     return payouts;
+  }
+
+  addCredits(payout)
+  {
+    this.won += payout;
+    this.credits += payout;
+    console.log('Credits: ' + this.credits);
+  }
+
+  deductCredits()
+  {
+    this.won = 0;
+    this.credits -= this.bet;
+    console.log('Credits: ' + this.credits);
   }
 }

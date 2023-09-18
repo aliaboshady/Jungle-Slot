@@ -40,7 +40,7 @@ class SpinOutcomeManager
       console.log(winningLinesIndexes);
     }
 
-    this.moneyManager.calculatePayouts(winningLinesIndexes);
-    return winningLinesIndexes;
+    const payouts = this.moneyManager.calculatePayouts(winningLinesIndexes);
+    return [winningLinesIndexes, payouts];
   }
 }

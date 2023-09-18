@@ -1,10 +1,11 @@
 class ReelsManager
 {
-  constructor(scene, spinOutcomeManager, winLinesManager, spinSpeed, rowCount, reelsPositions, reelSymbolsSpacing, symbolWidth, symbolHeight, reelPositionTop)
+  constructor(scene, spinOutcomeManager, winLinesManager, moneyManager, spinSpeed, rowCount, reelsPositions, reelSymbolsSpacing, symbolWidth, symbolHeight, reelPositionTop)
   {
     this.scene = scene;
     this.spinOutcomeManager = spinOutcomeManager;
     this.winLinesManager = winLinesManager;
+    this.moneyManager = moneyManager;
     this.spinSpeed = spinSpeed;
     this.rowCount = rowCount;
     this.reelsPositions = reelsPositions;
@@ -61,17 +62,19 @@ class ReelsManager
       reel.spinReelByRowsCount(shiftRowsCount);
       shiftRowsCount += 10;
     });
+
+    this.moneyManager.deductCredits();
   }
 
   onSpinningStop()
   {
     this.updateReelsGrid();
 
-    const winningLinesIndexes = this.spinOutcomeManager.calculateWin(this.reelsGrid);
+    const [winningLinesIndexes, payouts] = this.spinOutcomeManager.calculateWin(this.reelsGrid);
 
     if(winningLinesIndexes.length > 0)
     {
-      this.showWinningLinesAnimation(winningLinesIndexes);
+      this.showWinningLinesAnimation(winningLinesIndexes, payouts);
     }
     else
     {
@@ -96,18 +99,18 @@ class ReelsManager
     }
   }
 
-  showWinningLinesAnimation(winningLinesIndexes)
+  showWinningLinesAnimation(winningLinesIndexes, payouts)
   {
     let lastI = 0;
     winningLinesIndexes.forEach((winningLinesIndex, i) => {
-      this.scene.time.addEvent({delay: i * this.winLineAnimationDelay, callback: this.showWinningLine, args: [winningLinesIndex], callbackScope: this, loop: false});
+      this.scene.time.addEvent({delay: i * this.winLineAnimationDelay, callback: this.showWinningLine, args: [winningLinesIndex, payouts[i]], callbackScope: this, loop: false});
       lastI = i;
     });
 
     this.scene.time.addEvent({delay: (lastI + 2) * this.winLineAnimationDelay, callback: this.finishWinningLinesAnimation, callbackScope: this, loop: false});
   }
 
-  showWinningLine(winningLinesIndex)
+  showWinningLine(winningLinesIndex, payout)
   {
     this.reels.forEach(reel => {
       reel.showAllSymbols(false);
@@ -123,6 +126,7 @@ class ReelsManager
       }
     });
 
+    this.updateCredits(payout);
     this.winLinesManager.drawWinLines(true, winningLinesIndex[0]);
   }
 
@@ -136,6 +140,11 @@ class ReelsManager
 
     this.isReelsSpinning = false;
     this.scene.enableSpinButton();
+  }
+
+  updateCredits(payout)
+  {
+    this.moneyManager.addCredits(payout)
   }
 
   printReelGrid()

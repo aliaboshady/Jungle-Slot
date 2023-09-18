@@ -3,6 +3,10 @@ class ReelsInfo
   //                        0    1    2    3      4         5        6          7          8      9
   static AllReelSymbols = ['J', 'Q', 'K', 'A', 'Cherry', 'Grape', 'Lemon', 'Watermelon', 'Gem', 'Coin'];
 
+  static Bets = [10, 25, 50, 100, 200];
+  static InitialBet = this.Bets[3];
+  static InitialCredits = 10000;
+
   static Reels =
   {
     Reel1: [2, 0, 2, 1, 2, 2, 2, 2, 0, 2, 2, 1, 0, 2, 2, 2, 2, 2, 1, 2, 2, 2],

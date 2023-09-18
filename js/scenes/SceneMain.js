@@ -17,10 +17,10 @@ class SceneMain extends Phaser.Scene
     this.reelsPositionsY = [230, 380, 530];
 
     this.moneyManager = new MoneyManager(this);
+    this.buttonManager = new ButtonsManager(this, this.moneyManager);
     this.spinOutcomeManager = new SpinOutcomeManager(this, this.moneyManager, 3);
     this.winLinesManager = new WinLinesManager(this, this.reelsPositionsX, this.reelsPositionsY, 270, 1265);
-    this.reelsManager = new ReelsManager(this, this.spinOutcomeManager, this.winLinesManager, 15, 3, this.reelsPositionsX, 150, 150, 100, 230);
-    this.buttonManager = new ButtonsManager(this);
+    this.reelsManager = new ReelsManager(this, this.spinOutcomeManager, this.winLinesManager, this.moneyManager, 15, 3, this.reelsPositionsX, 150, 150, 100, 230);
   }
 
   create()

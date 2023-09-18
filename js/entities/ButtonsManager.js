@@ -1,8 +1,9 @@
 class ButtonsManager
 {
-  constructor(scene)
+  constructor(scene, moneyManager)
   {
     this.scene = scene;
+    this.moneyManager = moneyManager;
   }
 
   addButtons()
