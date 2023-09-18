@@ -1,8 +1,10 @@
 class MoneyManager
 {
-  constructor(scene)
+  constructor(scene, buttonManager)
   {
-    this.bet = ReelsInfo.InitialBet;
+    this.buttonManager = buttonManager;
+    this.betIndex = ReelsInfo.InitialBetIndex;
+    this.bet = ReelsInfo.Bets[this.betIndex];
     this.credits = ReelsInfo.InitialCredits;
     this.won = 0;
   }
@@ -26,15 +28,25 @@ class MoneyManager
 
   addCredits(payout)
   {
-    this.won += payout;
-    this.credits += payout;
-    console.log('Credits: ' + this.credits);
+    this.won += payout * (this.bet / 100);
+    this.credits += payout * (this.bet / 100);
+    this.buttonManager.updateWon(this.won);
+    this.buttonManager.updateCredits(this.credits);
   }
 
   deductCredits()
   {
     this.won = 0;
     this.credits -= this.bet;
-    console.log('Credits: ' + this.credits);
+    this.buttonManager.updateWon(this.won);
+    this.buttonManager.updateCredits(this.credits);
+  }
+
+  updateBet()
+  {
+    this.betIndex++;
+    if(this.betIndex >= ReelsInfo.Bets.length) this.betIndex = 0;
+    this.bet = ReelsInfo.Bets[this.betIndex];
+    return this.bet;
   }
 }

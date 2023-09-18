@@ -16,11 +16,13 @@ class SceneMain extends Phaser.Scene
     this.reelsPositionsX = [400, 580, 765, 952, 1135];
     this.reelsPositionsY = [230, 380, 530];
 
-    this.moneyManager = new MoneyManager(this);
-    this.buttonManager = new ButtonsManager(this, this.moneyManager);
+    this.buttonManager = new ButtonsManager(this);
+    this.moneyManager = new MoneyManager(this, this.buttonManager);
     this.spinOutcomeManager = new SpinOutcomeManager(this, this.moneyManager, 3);
     this.winLinesManager = new WinLinesManager(this, this.reelsPositionsX, this.reelsPositionsY, 270, 1265);
     this.reelsManager = new ReelsManager(this, this.spinOutcomeManager, this.winLinesManager, this.moneyManager, 15, 3, this.reelsPositionsX, 150, 150, 100, 230);
+  
+    this.buttonManager.setMoneyManager(this.moneyManager);
   }
 
   create()
@@ -46,7 +48,7 @@ class SceneMain extends Phaser.Scene
 
   enableSpinButton(enbale = true)
   {
-    this.spinButton.setTint(enbale ? 0xFFFFFF : this.disableTint);
+    this.buttonManager.spinButton.setTint(enbale ? 0xFFFFFF : this.disableTint);
   }
 
   onClickButtonLines(down)
