@@ -5,7 +5,7 @@ class ReelsInfo
 
   static Bets = [10, 25, 50, 100, 200];
   static InitialBetIndex = 3;
-  static InitialCredits = 10000;
+  static InitialCredits = 500;
 
   static Reels =
   {

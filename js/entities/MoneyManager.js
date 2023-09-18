@@ -49,4 +49,9 @@ class MoneyManager
     this.bet = ReelsInfo.Bets[this.betIndex];
     return this.bet;
   }
+
+  hasEnoughCredit()
+  {
+    return this.credits - this.bet >= 0;
+  }
 }
