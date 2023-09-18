@@ -18,6 +18,9 @@ class SceneLoader extends Phaser.Scene
     this.load.image('creditsButton', 'assets/images/buttons/credits.png');
     this.load.image('linesButton', 'assets/images/buttons/lines.png');
     this.load.image('wonButton', 'assets/images/buttons/won.png');
+    this.load.image('infoButton', 'assets/images/buttons/info.png');
+    this.load.image('soundOnButton', 'assets/images/buttons/sound on.png');
+    this.load.image('soundOffButton', 'assets/images/buttons/sound off.png');
     
     ReelsInfo.AllReelSymbols.forEach(function (symbolKey) {
       this.load.image(symbolKey, 'assets/images/symbols/' + symbolKey + '.png');
