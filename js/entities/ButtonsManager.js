@@ -62,10 +62,11 @@ class ButtonsManager
 
   onClickBet()
   {
-    if(!this.buttonsEnabled) return;
+    if(!this.buttonsEnabled && !this.infoPage.pageIsOpen()) return;
     this.moneyManager.updateBet();
     this.betText.setText('£' + (this.moneyManager.bet / 100).toFixed(2));
-    this.spinButton.setTint(this.moneyManager.hasEnoughCredit() ? 0xFFFFFF : this.disableTint);
+    this.spinButton.setTint(this.moneyManager.hasEnoughCredit() && !this.infoPage.pageIsOpen() ? 0xFFFFFF : this.disableTint);
+    this.infoPage.updateText();
   }
 
   onClickInfo()
@@ -96,7 +97,7 @@ class ButtonsManager
     this.buttonsEnabled = enbale;
     if(this.moneyManager.hasEnoughCredit()) this.spinButton.setTint(enbale ? 0xFFFFFF : this.disableTint);
     this.linesButton.setTint(enbale ? 0xFFFFFF : this.disableTint);
-    this.betButton.setTint(enbale ? 0xFFFFFF : this.disableTint);
+    this.betButton.setTint(enbale || this.infoPage.pageIsOpen() ? 0xFFFFFF : this.disableTint);
     this.infoButton.setTint(enbale || infoVisible ? 0xFFFFFF : this.disableTint);
   }
 }

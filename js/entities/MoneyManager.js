@@ -1,12 +1,15 @@
 class MoneyManager
 {
-  constructor(scene, buttonManager)
+  constructor(scene, buttonManager, infoPage)
   {
     this.buttonManager = buttonManager;
+    this.infoPage = infoPage;
     this.betIndex = ReelsInfo.InitialBetIndex;
     this.bet = ReelsInfo.Bets[this.betIndex];
     this.credits = ReelsInfo.InitialCredits;
     this.won = 0;
+
+    this.infoPage.setBet(this.bet);
   }
 
   calculatePayouts(winningLinesIndexes)
@@ -47,6 +50,9 @@ class MoneyManager
     this.betIndex++;
     if(this.betIndex >= ReelsInfo.Bets.length) this.betIndex = 0;
     this.bet = ReelsInfo.Bets[this.betIndex];
+    this.infoPage.setBet(this.bet);
+    this.won = 0;
+    this.buttonManager.updateWon(this.won);
     return this.bet;
   }
 
