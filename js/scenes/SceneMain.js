@@ -38,6 +38,9 @@ class SceneMain extends Phaser.Scene
     this.tableFrame = this.add.image(CENTERX, CENTERY, 'tableFrame').setDepth(2);
     Align.scaleToGameW(this.tableFrame, 0.9);
     
+    this.logo = this.add.image(CENTERX, 90, 'logo').setDepth(2);
+    Align.scaleToGameW(this.logo, 0.35);
+    
     this.buttonManager.addButtons();
   }
 
