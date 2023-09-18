@@ -1,7 +1,8 @@
 class SpinOutcomeManager
 {
-  constructor(scene, consecutiveSymbolCount)
+  constructor(scene, moneyManager, consecutiveSymbolCount)
   {
+    this.moneyManager = moneyManager;
     this.consecutiveSymbolCount = consecutiveSymbolCount;
     this.winLines = [];
     this.loadWinLines();
@@ -29,7 +30,7 @@ class SpinOutcomeManager
 
       if(foundSymbolCount >= this.consecutiveSymbolCount)
       {
-        winningLinesIndexes.push([winLineIndex, foundSymbolCount]);
+        winningLinesIndexes.push([winLineIndex, foundSymbolCount, firstSymbol]);
       }
     });
 
@@ -39,6 +40,7 @@ class SpinOutcomeManager
       console.log(winningLinesIndexes);
     }
 
+    this.moneyManager.calculatePayouts(winningLinesIndexes);
     return winningLinesIndexes;
   }
 }
