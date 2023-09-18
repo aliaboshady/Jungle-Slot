@@ -13,12 +13,15 @@ class SceneMain extends Phaser.Scene
     this.spinButton;
     this.linesButton;
     this.disableTint = 0x6E6E6E;
+    this.reelsPositionsX = [400, 580, 765, 952, 1135];
+    this.reelsPositionsY = [230, 380, 530];
 
     this.moneyManager = new MoneyManager(this);
     this.spinOutcomeManager = new SpinOutcomeManager(this, this.moneyManager, 3);
-    this.winLinesManager = new WinLinesManager(this, [400, 580, 765, 952, 1135], [230, 380, 530], 270, 1265);
-    this.reelsManager = new ReelsManager(this, this.spinOutcomeManager, this.winLinesManager, 15, 3, [400, 580, 765, 952, 1135], 150, 150, 100, 230);
-}
+    this.winLinesManager = new WinLinesManager(this, this.reelsPositionsX, this.reelsPositionsY, 270, 1265);
+    this.reelsManager = new ReelsManager(this, this.spinOutcomeManager, this.winLinesManager, 15, 3, this.reelsPositionsX, 150, 150, 100, 230);
+    this.buttonManager = new ButtonsManager(this);
+  }
 
   create()
   {
@@ -33,14 +36,7 @@ class SceneMain extends Phaser.Scene
     this.tableFrame = this.add.image(CENTERX, CENTERY, 'tableFrame').setDepth(2);
     Align.scaleToGameW(this.tableFrame, 0.9);
     
-    this.spinButton = this.add.image(CENTERX, 685, 'spinButton').setInteractive().on('pointerdown', this.reelsManager.onClickSpin, this.reelsManager);
-    this.spinButton.setDepth(2);
-    Align.scaleToGameW(this.spinButton, 0.2);
-    Align.scaleToGameW(this.add.image(CENTERX, 685, 'leaves'), 0.2);
-
-    this.linesButton = this.add.image(520, 685, 'linesButton').setInteractive().on('pointerdown', () => {this.onClickButtonLines(true)}, this).on('pointerup', () => {this.onClickButtonLines(false)}, this);
-    this.linesButton.setDepth(3);
-    Align.scaleToGameW(this.linesButton, 0.1);
+    this.buttonManager.addButtons();
   }
 
   update()
