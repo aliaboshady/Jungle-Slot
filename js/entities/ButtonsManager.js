@@ -1,8 +1,9 @@
 class ButtonsManager
 {
-  constructor(scene)
+  constructor(scene, infoPage)
   {
     this.scene = scene;
+    this.infoPage = infoPage;
     this.moneyManager;
     this.winLinesManager;
     this.disableTint = 0x6E6E6E;
@@ -69,8 +70,10 @@ class ButtonsManager
 
   onClickInfo()
   {
-    if(!this.buttonsEnabled) return;
-    
+    if(!this.buttonsEnabled && !this.scene.infoPage.visible) return;
+    const visible = !this.infoPage.toggleInfoPage();
+
+    this.enableButtons(visible, true);
   }
 
   onClickSound()
@@ -88,12 +91,12 @@ class ButtonsManager
     this.wonText.setText('£' + (won / 100).toFixed(2));
   }
 
-  enableButtons(enbale = true)
+  enableButtons(enbale = true, infoVisible = false)
   {
     this.buttonsEnabled = enbale;
     if(this.moneyManager.hasEnoughCredit()) this.spinButton.setTint(enbale ? 0xFFFFFF : this.disableTint);
     this.linesButton.setTint(enbale ? 0xFFFFFF : this.disableTint);
     this.betButton.setTint(enbale ? 0xFFFFFF : this.disableTint);
-    this.infoButton.setTint(enbale ? 0xFFFFFF : this.disableTint);
+    this.infoButton.setTint(enbale || infoVisible ? 0xFFFFFF : this.disableTint);
   }
 }

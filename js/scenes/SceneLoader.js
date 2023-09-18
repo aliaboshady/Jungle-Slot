@@ -9,6 +9,7 @@ class SceneLoader extends Phaser.Scene
   {    
     this.load.image('logo', 'assets/images/title/logo2.png');
     this.load.image('background', 'assets/images/background/background.png');
+    this.load.image('infoPage', 'assets/images/info page/info page.png');
     this.load.image('tableFrame', 'assets/images/table/table frame.png');
     this.load.image('tableBackground', 'assets/images/table/table background.png');
     this.load.image('leaves', 'assets/images/spin button/leaves.png');
