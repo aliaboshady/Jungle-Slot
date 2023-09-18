@@ -1,11 +1,12 @@
 class ReelsManager
 {
-  constructor(scene, spinOutcomeManager, winLinesManager, moneyManager, spinSpeed, rowCount, reelsPositions, reelSymbolsSpacing, symbolWidth, symbolHeight, reelPositionTop)
+  constructor(scene, spinOutcomeManager, winLinesManager, moneyManager, buttonManager, spinSpeed, rowCount, reelsPositions, reelSymbolsSpacing, symbolWidth, symbolHeight, reelPositionTop)
   {
     this.scene = scene;
     this.spinOutcomeManager = spinOutcomeManager;
     this.winLinesManager = winLinesManager;
     this.moneyManager = moneyManager;
+    this.buttonManager = buttonManager;
     this.spinSpeed = spinSpeed;
     this.rowCount = rowCount;
     this.reelsPositions = reelsPositions;
@@ -50,7 +51,7 @@ class ReelsManager
   {
     if(this.isReelsSpinning) return;
     this.isReelsSpinning = true;
-    this.scene.enableSpinButton(false);
+    this.buttonManager.enableButtons(false);
     this.winLinesManager.drawWinLines(false);
 
     this.reels.forEach(reel => {
@@ -79,7 +80,7 @@ class ReelsManager
     else
     {
       this.isReelsSpinning = false;
-      this.scene.enableSpinButton();
+      this.buttonManager.enableButtons();
     }
   }
 
@@ -139,7 +140,7 @@ class ReelsManager
     });
 
     this.isReelsSpinning = false;
-    this.scene.enableSpinButton();
+    this.buttonManager.enableButtons();
   }
 
   updateCredits(payout)
