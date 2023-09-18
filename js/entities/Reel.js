@@ -92,9 +92,10 @@ class Reel
 
         this.updateCurrentShownSymbols();
 
-        if(this.spinRowsCountRemaining <= 0 && this.isLastReel)
+        if(this.spinRowsCountRemaining <= 0)
         {
-          this.reelsManager.onSpinningStop();
+          this.reelsManager.onSingleReelSpinningStop();
+          if(this.isLastReel) this.reelsManager.onSpinningStop();
         }
       }
     });

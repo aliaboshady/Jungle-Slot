@@ -25,6 +25,15 @@ class SceneLoader extends Phaser.Scene
     this.load.image('soundOffButton', 'assets/images/buttons/sound off.png');
 
     this.load.audio('reelsSpins', 'assets/audio/reels spins.m4a');
+    this.load.audio('reelStop', 'assets/audio/reel stop.wav');
+    this.load.audio('winSound1', 'assets/audio/winlines/1.m4a');
+    this.load.audio('winSound2', 'assets/audio/winlines/2.m4a');
+    this.load.audio('winSound3', 'assets/audio/winlines/3.m4a');
+    this.load.audio('winSound4', 'assets/audio/winlines/4.m4a');
+    this.load.audio('winSound5', 'assets/audio/winlines/5.m4a');
+    this.load.audio('winSound6', 'assets/audio/winlines/6.m4a');
+    this.load.audio('winSound7', 'assets/audio/winlines/7.m4a');
+    this.load.audio('winSound8', 'assets/audio/winlines/8.m4a');
     
     ReelsInfo.AllReelSymbols.forEach(function (symbolKey) {
       this.load.image(symbolKey, 'assets/images/symbols/' + symbolKey + '.png');

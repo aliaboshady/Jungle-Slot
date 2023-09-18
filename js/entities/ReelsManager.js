@@ -87,6 +87,11 @@ class ReelsManager
     }
   }
 
+  onSingleReelSpinningStop()
+  {
+    this.audioManager.onSingleReelStopSpinning();
+  }
+
   updateReelsGrid()
   {
     this.reels.forEach((reel, i) => {
@@ -132,6 +137,7 @@ class ReelsManager
 
     this.updateCredits(payout);
     this.winLinesManager.drawWinLines(true, winningLinesIndex[0]);
+    this.audioManager.onSingleWinLineAnimationStart();
   }
 
   finishWinningLinesAnimation()
@@ -144,6 +150,7 @@ class ReelsManager
 
     this.isReelsSpinning = false;
     this.buttonManager.enableButtons();
+    this.audioManager.onWinLineAnimationEnd();
   }
 
   updateCredits(payout)
