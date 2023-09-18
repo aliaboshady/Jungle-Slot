@@ -1,9 +1,10 @@
 class ButtonsManager
 {
-  constructor(scene, infoPage)
+  constructor(scene, infoPage, audioManager)
   {
     this.scene = scene;
     this.infoPage = infoPage;
+    this.audioManager = audioManager;
     this.moneyManager;
     this.winLinesManager;
     this.disableTint = 0x6E6E6E;
@@ -44,7 +45,7 @@ class ButtonsManager
     Align.scaleToGameW(this.wonButton, 0.1);
     this.wonText = this.scene.add.text(1160, 695, '£' + (this.moneyManager.won / 100).toFixed(2), {fontSize: 18}).setOrigin(0.5, 0.5).setDepth(3);
 
-    this.soundButton = this.scene.add.image(1282, 685, 'soundOnButton').setInteractive().on('pointerdown', this.onClickSound, this).setDepth(3);
+    this.soundButton = this.scene.add.image(1282, 685, this.audioManager.soundOn ? 'soundOnButton' : 'soundOffButton').setInteractive().on('pointerdown', this.onClickSound, this).setDepth(3);
     Align.scaleToGameW(this.soundButton, 0.05);
   }
 
@@ -79,7 +80,8 @@ class ButtonsManager
 
   onClickSound()
   {
-    
+    this.soundButton.texture.key === 'soundOnButton' ? this.soundButton.setTexture('soundOffButton') : this.soundButton.setTexture('soundOnButton');
+    this.audioManager.toggleSound();
   }
 
   updateCredits(credits)

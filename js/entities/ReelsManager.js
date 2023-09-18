@@ -1,12 +1,13 @@
 class ReelsManager
 {
-  constructor(scene, spinOutcomeManager, winLinesManager, moneyManager, buttonManager, spinSpeed, rowCount, reelsPositions, reelSymbolsSpacing, symbolWidth, symbolHeight, reelPositionTop)
+  constructor(scene, spinOutcomeManager, winLinesManager, moneyManager, buttonManager, audioManager, spinSpeed, rowCount, reelsPositions, reelSymbolsSpacing, symbolWidth, symbolHeight, reelPositionTop)
   {
     this.scene = scene;
     this.spinOutcomeManager = spinOutcomeManager;
     this.winLinesManager = winLinesManager;
     this.moneyManager = moneyManager;
     this.buttonManager = buttonManager;
+    this.audioManager = audioManager;
     this.spinSpeed = spinSpeed;
     this.rowCount = rowCount;
     this.reelsPositions = reelsPositions;
@@ -65,11 +66,13 @@ class ReelsManager
     });
 
     this.moneyManager.deductCredits();
+    this.audioManager.onSpinReelsStart();
   }
 
   onSpinningStop()
   {
     this.updateReelsGrid();
+    this.audioManager.onSpinReelsEnd();
 
     const [winningLinesIndexes, payouts] = this.spinOutcomeManager.calculateWin(this.reelsGrid);
 

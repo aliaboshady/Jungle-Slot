@@ -15,12 +15,13 @@ class SceneMain extends Phaser.Scene
     this.reelsPositionsX = [400, 580, 765, 952, 1135];
     this.reelsPositionsY = [230, 380, 530];
 
+    this.audioManager = new AudioManager(this);
     this.infoPage = new InfoPage(this, CENTERX, CENTERY, 'infoPage');
-    this.buttonManager = new ButtonsManager(this, this.infoPage);
+    this.buttonManager = new ButtonsManager(this, this.infoPage, this.audioManager);
     this.moneyManager = new MoneyManager(this, this.buttonManager, this.infoPage);
     this.spinOutcomeManager = new SpinOutcomeManager(this, this.moneyManager, 3);
     this.winLinesManager = new WinLinesManager(this, this.reelsPositionsX, this.reelsPositionsY, 270, 1265);
-    this.reelsManager = new ReelsManager(this, this.spinOutcomeManager, this.winLinesManager, this.moneyManager, this.buttonManager, 15, 3, this.reelsPositionsX, 150, 150, 100, 230);
+    this.reelsManager = new ReelsManager(this, this.spinOutcomeManager, this.winLinesManager, this.moneyManager, this.buttonManager, this.audioManager, 15, 3, this.reelsPositionsX, 150, 150, 100, 230);
   
 
     this.buttonManager.setMoneyManager(this.moneyManager);
