@@ -16,6 +16,10 @@ class ReelsManager
     this.symbolHeight = symbolHeight;
     this.reelPositionTop = reelPositionTop;
 
+    this.shiftsMin = 25;
+    this.shiftsMax = 40;
+    this.additionalShiftsMin = 10;
+    this.additionalShiftsMax = 15;
     this.winLineAnimationDelay = 500;
     this.isReelsSpinning = false;
     this.reelsGrid = 
@@ -59,10 +63,10 @@ class ReelsManager
       reel.showAllSymbols();
     });
 
-    let shiftRowsCount = 25;
+    let shiftRowsCount = Phaser.Math.Between(this.shiftsMin, this.shiftsMax);
     this.reels.forEach(reel => {
       reel.spinReelByRowsCount(shiftRowsCount);
-      shiftRowsCount += 10;
+      shiftRowsCount +=  Phaser.Math.Between(this.additionalShiftsMin, this.additionalShiftsMax);
     });
 
     this.moneyManager.deductCredits();
