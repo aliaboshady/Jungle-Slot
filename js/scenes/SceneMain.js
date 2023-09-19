@@ -22,7 +22,6 @@ class SceneMain extends Phaser.Scene
     this.spinOutcomeManager = new SpinOutcomeManager(this, this.moneyManager, 3);
     this.winLinesManager = new WinLinesManager(this, this.reelsPositionsX, this.reelsPositionsY, 270, 1265);
     this.reelsManager = new ReelsManager(this, this.spinOutcomeManager, this.winLinesManager, this.moneyManager, this.buttonManager, this.audioManager, 15, 3, this.reelsPositionsX, 150, 150, 100, 230);
-  
 
     this.buttonManager.setMoneyManager(this.moneyManager);
     this.buttonManager.setWinLinesManager(this.winLinesManager);

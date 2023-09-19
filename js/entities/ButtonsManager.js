@@ -32,18 +32,18 @@ class ButtonsManager
 
     this.betButton = this.scene.add.image(370, 685, 'betButton').setInteractive().on('pointerdown', this.onClickBet, this).setDepth(3);
     Align.scaleToGameW(this.betButton, 0.1);
-    this.betText = this.scene.add.text(368, 695, '£' + (this.moneyManager.bet / 100).toFixed(2), {fontSize: 18}).setOrigin(0.5, 0.5).setDepth(3);
+    this.betText = this.scene.add.text(368, 695, '£' + (this.moneyManager.bet / 100).toFixed(2), {fontSize: 22, fontFamily: 'Lilita One'}).setOrigin(0.5, 0.5).setDepth(3);
 
     this.linesButton = this.scene.add.image(530, 685, 'linesButton').setInteractive().on('pointerdown', () => {this.onLinesBet(true)}, this).on('pointerup', () => {this.onLinesBet(false)}, this).setDepth(3);
     Align.scaleToGameW(this.linesButton, 0.1);
 
     this.creditsButton = this.scene.add.image(1000, 685, 'creditsButton').setDepth(3);
     Align.scaleToGameW(this.creditsButton, 0.1);
-    this.creditsText = this.scene.add.text(1000, 695, '£' + (this.moneyManager.credits / 100).toFixed(2), {fontSize: 18}).setOrigin(0.5, 0.5).setDepth(3);
+    this.creditsText = this.scene.add.text(1000, 695, '£' + (this.moneyManager.credits / 100).toFixed(2), {fontSize: 22, fontFamily: 'Lilita One'}).setOrigin(0.5, 0.5).setDepth(3);
 
     this.wonButton = this.scene.add.image(1160, 685, 'wonButton').setDepth(3);
     Align.scaleToGameW(this.wonButton, 0.1);
-    this.wonText = this.scene.add.text(1160, 695, '£' + (this.moneyManager.won / 100).toFixed(2), {fontSize: 18}).setOrigin(0.5, 0.5).setDepth(3);
+    this.wonText = this.scene.add.text(1160, 695, '£' + (this.moneyManager.won / 100).toFixed(2), {fontSize: 22, fontFamily: 'Lilita One'}).setOrigin(0.5, 0.5).setDepth(3);
 
     this.soundButton = this.scene.add.image(1282, 685, this.audioManager.soundOn ? 'soundOnButton' : 'soundOffButton').setInteractive().on('pointerdown', this.onClickSound, this).setDepth(3);
     Align.scaleToGameW(this.soundButton, 0.05);
