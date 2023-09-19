@@ -49,7 +49,15 @@ class ReelsManager
     this.reels.forEach(reel => {
       reel.addSymbolsToReel().setReelByRowsCount(Phaser.Math.Between(0, reel.reel.length));
     });
-    this.updateReelsGrid();
+
+    do //Make sure the first reels combination is not a win
+    {
+      this.reels.forEach(reel => {
+        reel.setReelByRowsCount(Phaser.Math.Between(0, reel.reel.length));
+      });
+      this.updateReelsGrid();
+
+    }while(this.reelsGrid[0] == -1 || this.spinOutcomeManager.calculateWin(this.reelsGrid)[0].length > 0)
   }
 
   onClickSpin()

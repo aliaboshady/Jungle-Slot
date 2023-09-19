@@ -18,6 +18,7 @@ class ReelsInfo
 
   static Payouts =
   [
+  // 3x    4x    5x
     [20,  100,  200],  // 'J'
     [20,  100,  200],  // 'Q'
     [20,  100,  200],  // 'K'
@@ -33,11 +34,11 @@ class ReelsInfo
   static WinLines =
   [
     {Name: 'Red',     PositionY: [0, 0, 0, 0, 0],   Color: 0xFF0000,    OffsetYTop: -20, OffsetYMid: 0,    OffsetYBot: -20},
-    {Name: 'Orange',  PositionY: [0, 1, 1, 1, 2],   Color: 0xFF8103,    OffsetYTop: 20,  OffsetYMid: -20,  OffsetYBot: -20},
     {Name: 'Yellow',  PositionY: [0, 0, 1, 2, 2],   Color: 0xFFFF00,    OffsetYTop: 0,   OffsetYMid: 0,    OffsetYBot: 0},
+    {Name: 'Orange',  PositionY: [0, 1, 1, 1, 2],   Color: 0xFF8103,    OffsetYTop: 20,  OffsetYMid: -20,  OffsetYBot: -20},
     {Name: 'Green',   PositionY: [1, 1, 1, 1, 1],   Color: 0x00FF00,    OffsetYTop: 0,   OffsetYMid: 0,    OffsetYBot: 0},
-    {Name: 'Purple',  PositionY: [2, 2, 1, 0, 0],   Color: 0xB303FF,    OffsetYTop: 0,   OffsetYMid: 0,    OffsetYBot: 0},
     {Name: 'Pink',    PositionY: [2, 1, 1, 1, 0],   Color: 0xFF9EAF,    OffsetYTop: 20,  OffsetYMid: 20,   OffsetYBot: -20},
+    {Name: 'Purple',  PositionY: [2, 2, 1, 0, 0],   Color: 0xB303FF,    OffsetYTop: 0,   OffsetYMid: 0,    OffsetYBot: 0},
     {Name: 'Blue',    PositionY: [2, 2, 2, 2, 2],   Color: 0x0000FF,    OffsetYTop: 20,  OffsetYMid: 0,    OffsetYBot: 20}
   ];
 
