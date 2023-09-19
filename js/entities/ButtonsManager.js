@@ -64,6 +64,7 @@ class ButtonsManager
   onClickBet()
   {
     if(!this.buttonsEnabled && !this.infoPage.pageIsOpen()) return;
+    this.audioManager.betSound(this.moneyManager.betIndex);
     this.moneyManager.updateBet();
     this.betText.setText('£' + (this.moneyManager.bet / 100).toFixed(2));
     this.spinButton.setTint(this.moneyManager.hasEnoughCredit() && !this.infoPage.pageIsOpen() ? 0xFFFFFF : this.disableTint);
@@ -74,7 +75,7 @@ class ButtonsManager
   {
     if(!this.buttonsEnabled && !this.scene.infoPage.visible) return;
     const visible = !this.infoPage.toggleInfoPage();
-
+    this.audioManager.infoPageToggleSound();
     this.enableButtons(visible, true);
   }
 

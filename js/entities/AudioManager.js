@@ -3,7 +3,7 @@ class AudioManager
   constructor(scene)
   {
     this.scene = scene;
-    this.soundOn = false;
+    this.soundOn = true;
     this.defaultVolume = 0.2;
 
     this.reelsSpinSound = this.scene.sound.add('reelsSpins');
@@ -58,5 +58,15 @@ class AudioManager
   {
     this.winlineIndex = 0;
     this.winlineSounds = [];
+  }
+
+  betSound(betIndex)
+  {
+    this.scene.sound.add('betSound' + betIndex, {volume: this.soundOn ? this.defaultVolume : 0}).play();
+  }
+
+  infoPageToggleSound()
+  {
+    this.scene.sound.add('infoPageToggle', {volume: this.soundOn ? this.defaultVolume : 0}).play();
   }
 }

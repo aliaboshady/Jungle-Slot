@@ -1,6 +1,6 @@
 class MoneyManager
 {
-  constructor(scene, buttonManager, infoPage)
+  constructor(buttonManager, infoPage)
   {
     this.buttonManager = buttonManager;
     this.infoPage = infoPage;
