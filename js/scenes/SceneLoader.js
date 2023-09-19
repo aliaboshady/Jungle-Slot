@@ -28,6 +28,7 @@ class SceneLoader extends Phaser.Scene
     this.load.audio('reelStop', 'assets/audio/reel stop.wav');
     this.load.audio('infoPageToggle', 'assets/audio/info page toggle.m4a');
 
+    this.load.audio('winlines', 'assets/audio/winlines/winlines.m4a');
     this.load.audio('winSound1', 'assets/audio/winlines/1.m4a');
     this.load.audio('winSound2', 'assets/audio/winlines/2.m4a');
     this.load.audio('winSound3', 'assets/audio/winlines/3.m4a');
@@ -36,7 +37,6 @@ class SceneLoader extends Phaser.Scene
     this.load.audio('winSound6', 'assets/audio/winlines/6.m4a');
     this.load.audio('winSound7', 'assets/audio/winlines/7.m4a');
     
-    this.load.audio('betSound', 'assets/audio/bet/bet.m4a');
     this.load.audio('betSound0', 'assets/audio/bet/0.m4a');
     this.load.audio('betSound1', 'assets/audio/bet/1.m4a');
     this.load.audio('betSound2', 'assets/audio/bet/2.m4a');

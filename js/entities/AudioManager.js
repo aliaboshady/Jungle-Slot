@@ -60,6 +60,11 @@ class AudioManager
     this.winlineSounds = [];
   }
 
+  winlinesSound()
+  {
+    this.scene.sound.add('winlines', {volume: this.soundOn ? this.defaultVolume : 0}).play();
+  }
+
   betSound(betIndex)
   {
     this.scene.sound.add('betSound' + betIndex, {volume: this.soundOn ? this.defaultVolume : 0}).play();

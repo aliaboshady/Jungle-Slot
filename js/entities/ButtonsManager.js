@@ -34,7 +34,7 @@ class ButtonsManager
     Align.scaleToGameW(this.betButton, 0.1);
     this.betText = this.scene.add.text(368, 695, '£' + (this.moneyManager.bet / 100).toFixed(2), {fontSize: 22, fontFamily: 'Lilita One'}).setOrigin(0.5, 0.5).setDepth(3);
 
-    this.linesButton = this.scene.add.image(530, 685, 'linesButton').setInteractive().on('pointerdown', () => {this.onLinesBet(true)}, this).on('pointerup', () => {this.onLinesBet(false)}, this).setDepth(3);
+    this.linesButton = this.scene.add.image(530, 685, 'linesButton').setInteractive().on('pointerdown', () => {this.onClickWinlines(true)}, this).on('pointerup', () => {this.onClickWinlines(false)}, this).setDepth(3);
     Align.scaleToGameW(this.linesButton, 0.1);
 
     this.creditsButton = this.scene.add.image(1000, 685, 'creditsButton').setDepth(3);
@@ -55,10 +55,11 @@ class ButtonsManager
     this.scene.reelsManager.onClickSpin();
   }
 
-  onLinesBet(down)
+  onClickWinlines(down)
   {
     if(!this.buttonsEnabled) return;
     this.winLinesManager.drawWinLines(down);
+    if(down) this.audioManager.winlinesSound();
   }
 
   onClickBet()
